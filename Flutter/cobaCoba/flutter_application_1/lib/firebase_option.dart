@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     return const FirebaseOptions(
-        apiKey: "AIzaSyDwgvdQWaGSIIDuaFJI7dejFpMTei6uyEY",
+        apiKey: "YOUR_API_KEY",
         authDomain: "fir-crud-68312.firebaseapp.com",
         databaseURL:
             "https://fir-crud-68312-default-rtdb.asia-southeast1.firebasedatabase.app",
