@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     return const FirebaseOptions(
-      apiKey: "AIzaSyBg5Wy5KYOM1dgms8neeTybhd0nnBtX7kE",
+      apiKey: "YOUR_API_KEY",
       authDomain: "basicapp-6cf30.firebaseapp.com",
       projectId: "basicapp-6cf30",
       storageBucket: "basicapp-6cf30.firebasestorage.app",
