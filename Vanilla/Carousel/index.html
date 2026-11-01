@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Carousel</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f5f0;
+            color: #5c3d2e;
+            padding: 20px;
+        }
+
+        .products-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #5c3d2e;
+            position: relative;
+        }
+
+        .products-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #d4a574;
+            margin: 10px auto;
+        }
+
+        .product-carousel {
+            position: relative;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            padding: 0 40px;
+        }
+
+        .carousel-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            gap: 20px;
+        }
+
+        .product-card {
+            flex: 0 0 calc(25% - 15px);
+            padding: 15px;
+            transition: transform 0.3s ease;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-grid-description {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .product-description {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #5c3d2e;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #8d6e63;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #5c3d2e;
+        }
+
+        .card-product-btn {
+            font-size: 1.5rem;
+            color: #8d6e63;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #d4a574;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: #b08c5e;
+        }
+
+        .carousel-btn.hidden {
+            opacity: 0;
+            visibility: hidden;
+            cursor: not-allowed;
+        }
+
+        .prev-btn {
+            left: 0;
+        }
+
+        .next-btn {
+            right: 0;
+        }
+
+        /* Tablet styles - menampilkan 2 card */
+        @media (max-width: 992px) {
+            .product-card {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+
+        /* Mobile styles - menampilkan 1 card */
+        @media (max-width: 576px) {
+            .product-card {
+                flex: 0 0 100%;
+            }
+            
+            .product-carousel {
+                padding: 0 30px;
+            }
+            
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="products-section">
+        <h2 class="products-title">Most Loved</h2>
+
+        <!-- Most Loved Carousel -->
+        <div class="product-carousel">
+            <!-- Tombol kiri -->
+            <button class="carousel-btn prev-btn" data-btn-prev="most-loved">
+                <iconify-icon icon="heroicons:chevron-left-20-solid"></iconify-icon>
+            </button>
+
+            <!-- Wrapper + Track -->
+            <div class="carousel-wrapper" data-carousel="most-loved">
+                <div class="carousel-track" data-track="most-loved">
+                    <!-- Most Loved Cards -->
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YmFrZXJ5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="Croissant" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Croissant (1 Pack)</h4>
+                                <p class="product-desc">Buttery, flaky, and delicious French pastry</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 45.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Sourdough Bread" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Sourdough Bread</h4>
+                                <p class="product-desc">Artisan bread with a tangy flavor</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-half-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 65.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Chocolate Chip Cookies" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Chocolate Chip Cookies (6 pcs)</h4>
+                                <p class="product-desc">Soft and chewy with rich chocolate chips</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 35.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Blueberry Muffin" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Blueberry Muffin</h4>
+                                <p class="product-desc">Moist muffin bursting with fresh blueberries</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 25.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1608190003443-86ab6a3d87bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Cinnamon Roll" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Cinnamon Roll</h4>
+                                <p class="product-desc">Sweet and spiced with cream cheese frosting</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 30.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Baguette" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">French Baguette</h4>
+                                <p class="product-desc">Crispy crust with a soft, airy interior</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 40.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="most-loved">
+                        <img src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Apple Pie" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Apple Pie</h4>
+                                <p class="product-desc">Classic pie with cinnamon-spiced apples</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 75.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol kanan -->
+            <button class="carousel-btn next-btn" data-btn-next="most-loved">
+                <iconify-icon icon="heroicons:chevron-right-20-solid"></iconify-icon>
+            </button>
+        </div>
+
+        <h2 class="products-title">Baked Goods</h2>
+
+        <!-- Baked Goods Carousel -->
+        <div class="product-carousel">
+            <!-- Tombol kiri -->
+            <button class="carousel-btn prev-btn" data-btn-prev="baked-goods">
+                <iconify-icon icon="heroicons:chevron-left-20-solid"></iconify-icon>
+            </button>
+
+            <!-- Wrapper + Track -->
+            <div class="carousel-wrapper" data-carousel="baked-goods">
+                <div class="carousel-track" data-track="baked-goods">
+                    <!-- Baked Goods Cards -->
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Donut" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Glazed Donut</h4>
+                                <p class="product-desc">Soft, fluffy donut with sweet glaze</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 20.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1596223575327-99a5be4faf1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Macarons" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Macarons (6 pcs)</h4>
+                                <p class="product-desc">Delicate French cookies with ganache filling</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 85.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1608190003443-86ab6a3d87bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Cinnamon Roll" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Cinnamon Roll</h4>
+                                <p class="product-desc">Sweet and spiced with cream cheese frosting</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 30.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Eclair" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Chocolate Eclair</h4>
+                                <p class="product-desc">Choux pastry filled with cream and chocolate</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 28.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Blueberry Muffin" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Blueberry Muffin</h4>
+                                <p class="product-desc">Moist muffin bursting with fresh blueberries</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 25.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Baguette" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">French Baguette</h4>
+                                <p class="product-desc">Crispy crust with a soft, airy interior</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 40.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-card="baked-goods">
+                        <img src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Apple Pie" class="product-image" />
+                        <div class="product-grid-description">
+                            <div class="product-description">
+                                <h4 class="product-name">Apple Pie</h4>
+                                <p class="product-desc">Classic pie with cinnamon-spiced apples</p>
+                                <div class="product-rating">
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                    <iconify-icon icon="heroicons:star-16-solid"></iconify-icon>
+                                </div>
+                                <span class="product-price">Rp 75.000</span>
+                            </div>
+                            <iconify-icon icon="tabler:dots" class="card-product-btn"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol kanan -->
+            <button class="carousel-btn next-btn" data-btn-next="baked-goods">
+                <iconify-icon icon="heroicons:chevron-right-20-solid"></iconify-icon>
+            </button>
+        </div>
+    </section>
+
+    <script type="module" src="./ProductCarousel.js"></script>
+</body>
+</html>
